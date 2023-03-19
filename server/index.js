@@ -5,6 +5,7 @@ const customerRouter = require('./routes/customerForm');
 const customerViewRouter = require('./routes/customerView');
 const requestRouter = require('./routes/requests');
 const addRequestRouter = require('./routes/addRequest');
+const requestPageRouter = require('./routes/requestPage');
 
 const app = express();
 
@@ -20,6 +21,10 @@ app.delete('/delete-customer/:id', customerViewRouter)
 // app.use('/customer-requests', customerRouter);
 app.get('/customer-requests', requestRouter)
 app.post('/add-request', addRequestRouter)
+
+
+// This is resposible for displaying individual requests
+app.get('/:request_id/user-request', requestPageRouter);
 // app.post('/customer-requests', requestRouter)
 // app.delete('/customer-requests', requestRouter)
 

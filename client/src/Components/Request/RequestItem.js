@@ -13,7 +13,7 @@ const RequestItem = (props) => {
       <Card className="user-item__content">
          <Link to={`/${props.request_id}/user-request`}>  {/*this would have a different link for every user */}
           <div className="user-item__info">
-            <h1>Request Id:{props.request_id}</h1>
+            <h1>Req Id:{props.request_id}</h1>
             <h1>Customer Id:{props.cust_id}</h1>
             <h2>First Name: {props.first_name}</h2>
             <h2>Last Name: {props.last_name}</h2>

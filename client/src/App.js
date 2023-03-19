@@ -35,7 +35,7 @@ function App() {
         </Route>
         <Route path="/:request_id/user-request" exact>
         <Navbar/>
-          <RequestPage />
+          <RequestPage/>
         </Route>
         <Route path="/add-request" exact>
           <Navbar />

@@ -39,19 +39,7 @@ router.get('/customer-requests', (req, res) => {
 
 
 
-// router.post("/customer-requests", (req, res) => {
-//     try {
-//       const { phone_number, request_text } = req.body;
-//       const newRequest = conn.query(
-//         "INSERT INTO customer_request (phone_number, request_text) VALUES ($1, $2) RETURNING *",
-//         [phone_number, request_text]
-//       );
-//       res.json(newRequest.rows[0]);
-//     } catch (err) {
-//       console.error(err.message);
-//       res.status(500).send("Server error");
-//     }
-//   });
+
 
 //   router.delete("/customer-requests/:id", async (req, res) => {
 //     try {
