@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const AddRequestForm = ({ onAddRequest }) => {
+const AddRequestForm = () => {
   const [phone_number, setPhoneNumber] = useState("+1");
   const [request_text, setRequestText] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("I am in handle submit");
     try {
-      const response = await axios.post("http://localhost:3001/customer-requests", {
+      const response = await axios.post("http://localhost:3001/add-request", {
         phone_number,
         request_text,
       });
-      alert("Request to add fail");
-      onAddRequest(response.data);
+      alert("Request added successfully");
+      // onAddRequest(response.data);
       setPhoneNumber("");
       setRequestText("");
     } catch (err) {
       console.error(err);
+      alert("Failed to add request");
     }
   };
 

@@ -44,7 +44,7 @@ router.get('/display-customer', (req, res) => {
   // delete a customer by id
   router.delete('/delete-customer/:id', (req, res) => {
     const sql = `DELETE FROM customer WHERE cust_id=${req.params.id}`;
-    conn.promise().query()(sql, (err, result) => {
+    conn.query(sql, (err, result) => {
       if (err) {
         console.error(err.message);
         res.status(500).send(`Error deleting customer with id=${req.params.id} from database`);
