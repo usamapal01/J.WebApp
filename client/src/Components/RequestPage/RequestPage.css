@@ -1,0 +1,45 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    display: inline;
+  }
+  
+  .value {
+    border-style: solid;
+    padding: 0.5em;
+  }
+  
+  h3,
+  h4 {
+    display: inline;
+  }
+  
+  .spacer {
+    height: 20vh;
+  }
+  
+  .Request_data_div {
+    border-style: solid;
+    overflow-wrap: break-word;
+    display: inline;
+    padding: 1em;
+  }
+  
+  .button {
+    height: 1em;
+    width: 1em;
+  }
