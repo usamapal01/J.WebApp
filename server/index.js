@@ -30,7 +30,7 @@ app.delete('/:request_id/user-request', requestPageRouter);
 // app.post('/customer-requests', requestRouter)
 // app.delete('/customer-requests', requestRouter)
 
-// resposible for indivdual messages
+// resposible for sending indivdual messages
 app.post('/send-message', twilioRequestRouter)
 
 const PORT = process.env.PORT || 3001;

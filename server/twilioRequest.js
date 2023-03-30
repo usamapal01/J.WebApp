@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 
-const accountSid = 'YOUR_ACCOUNT_SID';
-const authToken = 'YOUR_AUTH_TOKEN';
+require('dotenv').config();
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
+const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 
 router.post('/send-message', (req, res) => {
     const { to, body } = req.body;
@@ -12,7 +14,7 @@ router.post('/send-message', (req, res) => {
     client.messages
       .create({
         body,
-        from: 'your_twilio_phone_number',
+        from: twilioPhoneNumber,
         to
       })
       .then(() => {
