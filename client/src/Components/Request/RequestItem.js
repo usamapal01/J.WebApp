@@ -5,6 +5,10 @@ import Card from "./Card";
 import "./RequestItem.css";
 
 const RequestItem = (props) => {
+
+  // const handleDelete = () => {
+  //   console.log("Delete");
+  // };
   
 
   return (
@@ -21,6 +25,7 @@ const RequestItem = (props) => {
             <h3>
               Requests: {props.request_text}
             </h3>
+            {/* <button onClick={handleDelete}>Delete</button> */}
           </div>
         </Link>
         </Card>

@@ -23,4 +23,20 @@ router.get('/:request_id/user-request', (req, res) => {
   });
 });
 
+// resposible for deleting request from individual requestpage
+router.delete('/:request_id/user-request', (req, res) => {
+  const request_id = req.params.request_id;
+  const sql = 'DELETE FROM customer_request WHERE request_id = ?';
+  conn.query(sql, [request_id], (err, result) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Error deleting request from database');
+    } else if (result.affectedRows === 0) {
+      res.status(404).send('Request not found');
+    } else {
+      res.sendStatus(204); // No Content
+    }
+  });
+});
+
 module.exports = router;
