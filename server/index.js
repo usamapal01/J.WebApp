@@ -6,6 +6,7 @@ const customerViewRouter = require('./routes/customerView');
 const requestRouter = require('./routes/requests');
 const addRequestRouter = require('./routes/addRequest');
 const requestPageRouter = require('./routes/requestPage');
+const twilioRequestRouter = require('./twilioRequest');
 
 const app = express();
 
@@ -28,6 +29,9 @@ app.get('/:request_id/user-request', requestPageRouter);
 app.delete('/:request_id/user-request', requestPageRouter);
 // app.post('/customer-requests', requestRouter)
 // app.delete('/customer-requests', requestRouter)
+
+// resposible for indivdual messages
+app.post('/send-message', twilioRequestRouter)
 
 const PORT = process.env.PORT || 3001;
 

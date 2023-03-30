@@ -6,8 +6,9 @@ import { useParams, useHistory } from "react-router-dom";
 
 const RequestPage = () => {
   const [requestData, setRequestData] = useState({});
-  const { request_id } = useParams();
+  const { request_id } = useParams(); // parameter
   const history = useHistory();
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     axios
@@ -32,6 +33,23 @@ const RequestPage = () => {
       });
   };
 
+  const handleSendMessage = () => {
+    axios
+      .post(
+        "http://localhost:3001/send-message",
+        {
+          to: requestData.phone_number,
+          body: message,
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       <div>
@@ -48,6 +66,14 @@ const RequestPage = () => {
         <p>
           <b>Request text:</b> {requestData.request_text}
         </p>
+      </div>
+      <div>
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type your message here"
+        />
+        <button onClick={handleSendMessage}>Send</button>
       </div>
       <div>
         <button onClick={handleDeleteRequest}>Delete Request</button>
