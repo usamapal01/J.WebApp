@@ -38,6 +38,22 @@ const CustomerForm = () => {
     }
   };
 
+  const handleWelcomeMessage = () => {
+    // console.log(first); // display name before sending sms
+    axios
+      .post("http://localhost:3001/welcome-message", {
+        to: phone,
+        first_name: first,
+        last_name: last,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="form-body">
       <h3>Please enter your details</h3>
@@ -87,7 +103,7 @@ const CustomerForm = () => {
           />
         </MDBRow>
 
-        <MDBBtn type="submit" block>
+        <MDBBtn onClick={handleWelcomeMessage} type="submit" block>
           Submit
         </MDBBtn>
       </form>

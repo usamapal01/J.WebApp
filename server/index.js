@@ -7,6 +7,7 @@ const requestRouter = require("./routes/requests");
 const addRequestRouter = require("./routes/addRequest");
 const requestPageRouter = require("./routes/requestPage");
 const twilioRequestRouter = require("./twilioRequest");
+const twilioWelcomeSMSRouter = require("./twilioWelcomeSMS");
 
 const app = express();
 
@@ -31,6 +32,9 @@ app.delete("/:request_id/user-request", requestPageRouter);
 
 // resposible for sending indivdual messages
 app.post("/send-message", twilioRequestRouter);
+
+// resposible for sending a welcome messages
+app.post("/welcome-message", twilioWelcomeSMSRouter);
 
 const PORT = process.env.PORT || 3001;
 
