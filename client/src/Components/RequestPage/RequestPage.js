@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 
-// import './RequestPage.css';
-
 const RequestPage = () => {
   const [requestData, setRequestData] = useState({});
   const { request_id } = useParams(); // parameter
