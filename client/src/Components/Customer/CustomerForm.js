@@ -14,12 +14,17 @@ const CustomerForm = () => {
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("+1");
+  const [phone, setPhone] = useState("");
   const [saleNotifications, setSaleNotifications] = useState(1);
   const [stockNotifications, setStockNotifications] = useState(1);
-
+  const [error, setError] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!first || !last || phone.length !== 10) {
+      setError("Please fill out all fields");
+      return;
+    }
+
     try {
       const saleNotificationsValue = saleNotifications ? 1 : 0;
       const stockNotificationsValue = stockNotifications ? 1 : 0;
@@ -27,19 +32,20 @@ const CustomerForm = () => {
         first,
         last,
         email,
-        phone,
+        phone: `+1${phone}`,
         saleNotifications: saleNotificationsValue,
         stockNotifications: stockNotificationsValue,
       });
       alert("Customer added successfully");
+      handleWelcomeMessage();
     } catch (error) {
       console.error(error);
       alert("Failed to add customer");
     }
   };
 
+  // notification sms for new customer
   const handleWelcomeMessage = () => {
-    // console.log(first); // display name before sending sms
     axios
       .post("http://localhost:3001/welcome-message", {
         to: phone,
@@ -82,13 +88,31 @@ const CustomerForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <MDBInput
-          className="mb-6"
-          type="text"
-          label="Phone Number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
+          {phone ? (
+            <span style={{ position: "absolute", left: "10px" }}>+1</span>
+          ) : (
+            ""
+          )}
+          <MDBInput
+            className="mb-1"
+            type="text"
+            label="Phone Number"
+            style={{ paddingLeft: "30px", paddingTop: "8px" }}
+            value={phone}
+            onChange={(e) => {
+              if (e.target.value.length > 11) return;
+              setPhone(e.target.value.replace(/\D/g, ""));
+            }}
+          />
+        </div>
 
         <MDBRow className="mb-6 checkbox">
           <MDBCheckbox
@@ -102,8 +126,8 @@ const CustomerForm = () => {
             onChange={() => setStockNotifications(!stockNotifications)}
           />
         </MDBRow>
-
-        <MDBBtn onClick={handleWelcomeMessage} type="submit" block>
+        {error && <div className="error">{error}</div>}
+        <MDBBtn type="submit" block>
           Submit
         </MDBBtn>
       </form>
