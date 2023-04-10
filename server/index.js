@@ -31,7 +31,7 @@ app.delete("/:request_id/user-request", requestPageRouter);
 // app.delete('/customer-requests', requestRouter)
 
 // resposible for sending indivdual messages
-app.post("/send-message", twilioRequestRouter);
+app.use("/", twilioRequestRouter);
 
 // resposible for sending a welcome messages
 app.post("/welcome-message", twilioWelcomeSMSRouter);

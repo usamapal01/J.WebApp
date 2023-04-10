@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "./ViewCustomer.css";
+import BulkSmsPopup from "./BulkSmsPopup";
 
 const ViewCustomer = () => {
+  const [smsPopup, setSmsPopup] = useState(false);
   const [customers, setCustomers] = useState([]);
   const [editingCustomerId, setEditingCustomerId] = useState(null);
+  const [error, setError] = useState("")
   const [editedCustomer, setEditedCustomer] = useState({
     first_name: "",
     last_name: "",
@@ -42,6 +45,10 @@ const ViewCustomer = () => {
   };
 
   const handleSave = (id) => {
+    if (!editedCustomer.first_name || !editedCustomer.last_name || editedCustomer.phone_number.length !== 12) {
+      setError("Please fill out all fields")
+      return;
+    }
     axios
       .put(`http://localhost:3001/update-customer/${id}`, editedCustomer)
       .then((res) => {
@@ -55,6 +62,7 @@ const ViewCustomer = () => {
           sale_notification: false,
           newstock_notification: false,
         });
+        setError("")
         setCustomers((prevCustomers) =>
           prevCustomers.map((customer) =>
             customer.cust_id === id
@@ -69,6 +77,7 @@ const ViewCustomer = () => {
   };
 
   const handleCancel = () => {
+    setError("")
     setEditingCustomerId(null);
     setEditedCustomer({
       first_name: "",
@@ -93,10 +102,14 @@ const ViewCustomer = () => {
         console.error(err);
       });
   };
-
+  const handleSmsPopup = () => setSmsPopup(prev => !prev)
   return (
-    <div>
-      <h1>View Customers</h1>
+    <div >
+      <div className="flex">
+
+        <h1>View Customers</h1>
+        <button type="button" onClick={handleSmsPopup}> Bulk SMS</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -114,7 +127,7 @@ const ViewCustomer = () => {
         <tbody>
           {customers.map((customer) => {
             if (customer.cust_id === editingCustomerId) {
-              return (
+              return (<>
                 <tr key={customer.cust_id}>
                   <td>{customer.cust_id}</td>
                   <td>
@@ -177,6 +190,10 @@ const ViewCustomer = () => {
                     </button>
                   </td>
                 </tr>
+                {error ? <tr>
+                  <td colSpan={9} className="error">{error}</td>
+                </tr> : ""}
+              </>
               );
             } else {
               return (
@@ -206,6 +223,7 @@ const ViewCustomer = () => {
           })}
         </tbody>
       </table>
+      {smsPopup ? <BulkSmsPopup customers={customers} onClose={handleSmsPopup} /> : ""}
     </div>
   );
 };
