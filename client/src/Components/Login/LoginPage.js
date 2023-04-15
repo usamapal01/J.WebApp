@@ -23,7 +23,7 @@ function LoginPage() {
     event.preventDefault();
     try {
       await login(email, password);
-      history.push("/display-customer");
+      history.push("/customer-requests");
     } catch (error) {
       setErrorMessage(error.message);
     }
