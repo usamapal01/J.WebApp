@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
+import "./AddRequestForm.css";
 
 const AddRequestForm = () => {
   const [phone_number, setPhoneNumber] = useState("+1");
@@ -26,28 +27,32 @@ const AddRequestForm = () => {
 
   return (
     <React.Fragment>
-    <Navbar />
-    <form onSubmit={handleSubmit}>
-      <label>
-        Phone number:
-        <input
-          type="text"
-          value={phone_number}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Request:
-        <input
-          type="text"
-          value={request_text}
-          onChange={(e) => setRequestText(e.target.value)}
-        />
-      </label>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+      <Navbar />
+      <form onSubmit={handleSubmit} className="add-request-form">
+        <label>
+          Phone number:
+          <input
+            type="text"
+            value={phone_number}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="add-request-input"
+          />
+        </label>
+        <br />
+        <label>
+          Request:
+          <textarea
+            className="add-request-input request-text-input"
+            type="text"
+            value={request_text}
+            onChange={(e) => setRequestText(e.target.value)}
+          />
+        </label>
+        <br />
+        <button type="submit" className="add-request-button">
+          Submit
+        </button>
+      </form>
     </React.Fragment>
   );
 };

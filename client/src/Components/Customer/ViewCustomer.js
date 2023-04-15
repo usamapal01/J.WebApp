@@ -110,7 +110,7 @@ const ViewCustomer = () => {
       <div className="flex">
 
         <h1>View Customers</h1>
-        <button type="button" onClick={handleSmsPopup}> Bulk SMS</button>
+        <button className="bulkSMS-button" type="button" onClick={handleSmsPopup}> Bulk SMS</button>
       </div>
       <table>
         <thead>
@@ -215,7 +215,7 @@ const ViewCustomer = () => {
                     </button>
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(customer.cust_id)}>
+                    <button className="delete-button" onClick={() => handleDelete(customer.cust_id)}>
                       Delete
                     </button>
                   </td>

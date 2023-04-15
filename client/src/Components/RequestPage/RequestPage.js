@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import "./RequestPage.css";
 
 const RequestPage = () => {
   const [requestData, setRequestData] = useState({});
@@ -40,6 +41,7 @@ const RequestPage = () => {
       })
       .then((response) => {
         console.log(response.data);
+        alert(response.data)
       })
       .catch((error) => {
         console.error(error);
@@ -53,9 +55,10 @@ const RequestPage = () => {
   };
 
   return (
-    <div>
+    <React.Fragment>
     <Navbar />
-      <div>
+    <div className="request-page">
+      <div className="request-details">
         <h1>Request {requestData.request_id}</h1>
         <p>
           <b>Customer ID:</b> {requestData.cust_id}
@@ -70,19 +73,29 @@ const RequestPage = () => {
           <b>Request text:</b> {requestData.request_text}
         </p>
       </div>
-      <div>
+      <div className="send-message">
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message here"
+          className="message-input"
         />
-        <button onClick={handleSendMessage}>Send</button>
-        <button onClick={handleAutoGenerate}>Auto Generate</button>
+        <div className="button-group">
+          <button onClick={handleSendMessage} className="send-button">
+            Send
+          </button>
+          <button onClick={handleAutoGenerate} className="auto-generate-button">
+            Auto Generate
+          </button>
+        </div>
       </div>
-      <div>
-        <button onClick={handleDeleteRequest}>Delete Request</button>
+      <div className="delete-request">
+        <button onClick={handleDeleteRequest} className="delete-button">
+          Delete Request
+        </button>
       </div>
     </div>
+    </React.Fragment>
   );
 };
 
