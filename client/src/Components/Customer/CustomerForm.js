@@ -7,6 +7,7 @@ import {
   MDBCheckbox,
   MDBBtn,
 } from "mdb-react-ui-kit";
+import { logout } from "../Login/authentication";
 
 import "./CustomerForm.css";
 
@@ -18,11 +19,39 @@ const CustomerForm = () => {
   const [saleNotifications, setSaleNotifications] = useState(1);
   const [stockNotifications, setStockNotifications] = useState(1);
   const [error, setError] = useState("");
-  
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isNavigatingAway, setIsNavigatingAway] = useState(false);
+
+  //Option 1
+  //this will prevent back button in the browser
+  // useEffect(() => {
+  //   const preventBackButton = (event) => {
+  //     event.preventDefault();
+  //     window.history.pushState(null, null, window.location.pathname);
+  //   };
+
+  //   window.history.pushState(null, null, window.location.pathname);
+  //   window.addEventListener("popstate", preventBackButton);
+
+  //   return () => {
+  //     window.removeEventListener("popstate", preventBackButton);
+  //   };
+  // }, []);
+
+  //Option 2
+  //Back button and changing url will take effect and log you out
+  // Upon clicking back button it will take you to home page but log you out
   useEffect(() => {
-    const preventBackButton = (event) => {
+    const preventBackButton = async (event) => {
       event.preventDefault();
-      window.history.pushState(null, null, window.location.pathname);
+
+      try {
+        await logout();
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
+
+      window.location.href = "/";
     };
 
     window.history.pushState(null, null, window.location.pathname);
@@ -30,6 +59,42 @@ const CustomerForm = () => {
 
     return () => {
       window.removeEventListener("popstate", preventBackButton);
+    };
+  }, []);
+
+  //part of option 2
+  // if we try to change URL it will log me out and take me to home page
+  useEffect(() => {
+    if (isNavigatingAway) {
+      const checkUrl = async () => {
+        const currentUrl = window.location.href;
+        const homepageUrl = "http://localhost:3000/";
+
+        if (currentUrl !== homepageUrl) {
+          try {
+            await logout();
+          } catch (error) {
+            setErrorMessage(error.message);
+          }
+
+          window.location.href = "/";
+        }
+      };
+
+      checkUrl();
+    }
+  }, [isNavigatingAway]);
+
+  //part of option 2
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      setIsNavigatingAway(true);
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 

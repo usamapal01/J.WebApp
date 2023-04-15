@@ -11,7 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import "./LoginPage.css";
 import logo from "../../img/logo.png";
-import { login } from './authentication';
+import { login } from "./authentication";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -90,7 +90,7 @@ function LoginPage() {
                 )}
               </MDBBtn>
 
-                  {/* or use Link from react-router-dom 
+              {/* or use Link from react-router-dom 
                   but it doesnt makes sense to implement it here */}
               <div>
                 <p className="mb-0">

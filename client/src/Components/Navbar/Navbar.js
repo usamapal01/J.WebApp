@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./Navbar";
-import { logout, isAuthenticated } from '../Login/authentication';
+import { logout, isAuthenticated } from "../Login/authentication";
 import { useHistory } from "react-router-dom";
 
 const Nav = styled.nav`
@@ -37,7 +37,7 @@ const NavLink = styled(Link)`
 `;
 
 const LogoutLink = styled(NavLink)`
-  color: #B8860B;
+  color: #b8860b;
 `;
 
 const Navbar = () => {
@@ -67,9 +67,7 @@ const Navbar = () => {
           <LogoutLink onClick={handleLogout}>Logout</LogoutLink>
         )}
       </Links>
-      {errorMessage && (
-        <span className="text-danger ms-2">{errorMessage}</span>
-      )}
+      {errorMessage && <span className="text-danger ms-2">{errorMessage}</span>}
     </Nav>
   );
 };
