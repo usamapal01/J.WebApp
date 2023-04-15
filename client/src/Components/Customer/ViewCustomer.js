@@ -3,6 +3,7 @@ import axios from "axios";
 
 import "./ViewCustomer.css";
 import BulkSmsPopup from "./BulkSmsPopup";
+import Navbar from "../Navbar/Navbar";
 
 const ViewCustomer = () => {
   const [smsPopup, setSmsPopup] = useState(false);
@@ -105,6 +106,7 @@ const ViewCustomer = () => {
   const handleSmsPopup = () => setSmsPopup(prev => !prev)
   return (
     <div >
+    <Navbar />
       <div className="flex">
 
         <h1>View Customers</h1>

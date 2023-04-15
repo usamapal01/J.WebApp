@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import "./LoginPage.css";
 import logo from "../../img/logo.png";
+import { login } from './authentication';
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -21,21 +22,10 @@ function LoginPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        // Redirect to the customer page or set a session cookie
-        history.push("/display-customer");
-      } else {
-        setErrorMessage(data.message);
-      }
+      await login(email, password);
+      history.push("/display-customer");
     } catch (error) {
-      console.error(error);
-      setErrorMessage("An error occurred while logging in");
+      setErrorMessage(error.message);
     }
   };
 

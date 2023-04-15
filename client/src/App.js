@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import "./index.css";
+import PrivateRoute from './Components/PrivateRoute';
 
 import LoginPage from "./Components/Login/LoginPage";
 import CustomerForm from "./Components/Customer/CustomerForm";
@@ -21,31 +22,16 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/customer" exact>
-          <CustomerForm />
-        </Route>
-        <Route path="/display-customer" exact>
-          <Navbar />
-          <ViewCustomer />
-        </Route>
-        <Route path="/customer-requests" exact>
-        <Navbar/>
-          <Requests />
-          <Footer />
-        </Route>
-        <Route path="/:request_id/user-request" exact>
-        <Navbar/>
-          <RequestPage/>
-        </Route>
-        <Route path="/add-request" exact>
-          <Navbar />
-          <AddRequestForm />
-        </Route>
         <Route path="/" exact>
+        <Navbar />
           <LoginPage />
           <Footer />
         </Route>
-
+        <PrivateRoute path="/customer" exact component={CustomerForm} />
+        <PrivateRoute path="/display-customer" exact component={ViewCustomer} />
+        <PrivateRoute path="/customer-requests" exact component={Requests} />
+        <PrivateRoute path="/:request_id/user-request" exact component={RequestPage} />
+        <PrivateRoute path="/add-request" exact component={AddRequestForm} />
         <Redirect to="/" />
         {/*if anything else is enter it will direct to loginpage(home route) */}
       </Switch>

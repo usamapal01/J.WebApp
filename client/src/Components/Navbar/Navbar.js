@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./Navbar";
+import { logout, isAuthenticated } from '../Login/authentication';
+import { useHistory } from "react-router-dom";
 
 const Nav = styled.nav`
   display: flex;
@@ -35,6 +37,18 @@ const NavLink = styled(Link)`
 `;
 
 const Navbar = () => {
+  const history = useHistory();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      history.push("/");
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
   return (
     <Nav>
       <Logo>J. Customer Portal</Logo>
@@ -44,7 +58,13 @@ const Navbar = () => {
         <NavLink to="/display-customer">View Customers</NavLink>
         <NavLink to="/customer-requests">Requests</NavLink>
         <NavLink to="/add-request">Add Request</NavLink>
+        {isAuthenticated() && (
+          <NavLink onClick={handleLogout}>Logout</NavLink>
+        )}
       </Links>
+      {errorMessage && (
+        <span className="text-danger ms-2">{errorMessage}</span>
+      )}
     </Nav>
   );
 };
