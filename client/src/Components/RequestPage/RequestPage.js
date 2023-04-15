@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 
 const RequestPage = () => {
   const [requestData, setRequestData] = useState({});
@@ -53,6 +54,7 @@ const RequestPage = () => {
 
   return (
     <div>
+    <Navbar />
       <div>
         <h1>Request {requestData.request_id}</h1>
         <p>

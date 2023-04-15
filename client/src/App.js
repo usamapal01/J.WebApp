@@ -27,7 +27,12 @@ function App() {
           <LoginPage />
           <Footer />
         </Route>
+        {/* Private route for customerForm page */}
         <PrivateRoute path="/customer" exact component={CustomerForm} />
+        {/* use below code if authentication is not needed for CustomerForm page */}
+        {/* <Route path="/customer" exact>
+          <CustomerForm />
+        </Route> */}
         <PrivateRoute path="/display-customer" exact component={ViewCustomer} />
         <PrivateRoute path="/customer-requests" exact component={Requests} />
         <PrivateRoute path="/:request_id/user-request" exact component={RequestPage} />

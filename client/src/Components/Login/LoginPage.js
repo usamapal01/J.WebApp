@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   MDBBtn,
   MDBContainer,
@@ -90,12 +90,14 @@ function LoginPage() {
                 )}
               </MDBBtn>
 
+                  {/* or use Link from react-router-dom 
+                  but it doesnt makes sense to implement it here */}
               <div>
                 <p className="mb-0">
                   Navigating to Customer Page?{" "}
-                  <a href="/customer" class="text-white-50 fw-bold">
+                  <Link to="/customer" class="text-white-50 fw-bold">
                     Click here
-                  </a>
+                  </Link>
                 </p>
               </div>
             </MDBCardBody>

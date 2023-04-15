@@ -36,6 +36,10 @@ const NavLink = styled(Link)`
   }
 `;
 
+const LogoutLink = styled(NavLink)`
+  color: #B8860B;
+`;
+
 const Navbar = () => {
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,6 +48,7 @@ const Navbar = () => {
     try {
       await logout();
       history.push("/");
+      window.location.reload(false); // reload the page
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -59,7 +64,7 @@ const Navbar = () => {
         <NavLink to="/customer-requests">Requests</NavLink>
         <NavLink to="/add-request">Add Request</NavLink>
         {isAuthenticated() && (
-          <NavLink onClick={handleLogout}>Logout</NavLink>
+          <LogoutLink onClick={handleLogout}>Logout</LogoutLink>
         )}
       </Links>
       {errorMessage && (

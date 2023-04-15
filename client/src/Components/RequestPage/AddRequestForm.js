@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 const AddRequestForm = () => {
   const [phone_number, setPhoneNumber] = useState("+1");
@@ -24,6 +25,8 @@ const AddRequestForm = () => {
   };
 
   return (
+    <React.Fragment>
+    <Navbar />
     <form onSubmit={handleSubmit}>
       <label>
         Phone number:
@@ -45,6 +48,7 @@ const AddRequestForm = () => {
       <br />
       <button type="submit">Submit</button>
     </form>
+    </React.Fragment>
   );
 };
 
