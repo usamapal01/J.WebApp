@@ -42,7 +42,6 @@ function App() {
           <AddRequestForm />
         </Route>
         <Route path="/" exact>
-          <Navbar />
           <LoginPage />
           <Footer />
         </Route>

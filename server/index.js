@@ -8,12 +8,15 @@ const addRequestRouter = require("./routes/addRequest");
 const requestPageRouter = require("./routes/requestPage");
 const twilioRequestRouter = require("./twilioRequest");
 const twilioWelcomeSMSRouter = require("./twilioWelcomeSMS");
+const loginRouter = require("./routes/login");
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.post("/", loginRouter);
 // customer form routes
 app.use("/customer", customerRouter);
 //app.use('/display-customer', customerViewRouter); // for some reason this code is displaying REQUESTS

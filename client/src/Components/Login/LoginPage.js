@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   MDBBtn,
   MDBContainer,
@@ -12,9 +13,34 @@ import "./LoginPage.css";
 import logo from "../../img/logo.png";
 
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const history = useHistory();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3001/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        // Redirect to the customer page or set a session cookie
+        history.push("/display-customer");
+      } else {
+        setErrorMessage(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMessage("An error occurred while logging in");
+    }
+  };
 
   return (
-    <MDBContainer fluid className='m-0 p-5 loginBody' >
+    <MDBContainer fluid className="m-0 p-5 loginBody">
       <MDBRow className="d-flex justify-content-center align-items-center h-100">
         <MDBCol col="12">
           <MDBCard
@@ -41,8 +67,10 @@ function LoginPage() {
                 id="formControlLg"
                 type="email"
                 size="lg"
-                onChange={(e) => console.log(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
+
               <MDBInput
                 wrapperClass="mb-4 mx-5 w-100"
                 labelClass="text-white"
@@ -50,6 +78,8 @@ function LoginPage() {
                 id="formControlLg"
                 type="password"
                 size="lg"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <p className="small mb-3 pb-lg-2">
@@ -57,39 +87,18 @@ function LoginPage() {
                   Forgot password?
                 </a>
               </p>
-              <MDBBtn outline className="mx-2 px-5" color="white" size="lg">
+              <MDBBtn
+                outline
+                className="mx-2 px-5"
+                color="white"
+                size="lg"
+                onClick={handleSubmit}
+              >
                 Login
+                {errorMessage && (
+                  <span className="text-danger ms-2">{errorMessage}</span>
+                )}
               </MDBBtn>
-
-              {/* removing logos since it is not a requirment(might add later) */}
-              <div className="d-flex flex-row mt-3 mb-5">
-                {/* <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-3"
-                  style={{ color: "white" }}
-                >
-                  <MDBIcon fab icon="facebook-f" size="lg" />
-                </MDBBtn> */}
-
-                {/* <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-3"
-                  style={{ color: "white" }}
-                >
-                  <MDBIcon fab icon="twitter" size="lg" />
-                </MDBBtn> */}
-
-                {/* <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-3"
-                  style={{ color: "white" }}
-                >
-                  <MDBIcon fab icon="google" size="lg" />
-                </MDBBtn> */}
-              </div>
 
               <div>
                 <p className="mb-0">
