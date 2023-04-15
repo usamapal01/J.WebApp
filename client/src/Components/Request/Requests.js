@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RequestList from "./RequestList";
 // import AddRequestForm from "../RequestPage/AddRequestForm";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 const Requests = () => {
   const [requests, setRequests] = useState([]);
@@ -31,6 +32,7 @@ const Requests = () => {
 
   return (
     <div>
+    <Navbar />
       {/* <AddRequestForm onAddRequest={handleAddRequest} /> */}
       <RequestList items={requests} />
       {/* <RequestList items={requests} onDeleteRequest={handleDeleteRequest} /> */}
