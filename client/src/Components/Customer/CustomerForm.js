@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   MDBInput,
@@ -18,6 +18,21 @@ const CustomerForm = () => {
   const [saleNotifications, setSaleNotifications] = useState(1);
   const [stockNotifications, setStockNotifications] = useState(1);
   const [error, setError] = useState("");
+  
+  useEffect(() => {
+    const preventBackButton = (event) => {
+      event.preventDefault();
+      window.history.pushState(null, null, window.location.pathname);
+    };
+
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener("popstate", preventBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", preventBackButton);
+    };
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!first || !last || phone.length !== 10) {

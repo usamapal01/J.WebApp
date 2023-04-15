@@ -48,7 +48,7 @@ router.post('/send-bulk-message', (req, res) => {
           // error = [...error, number];
 
         });
-    }, 100 + (number * 100)); 
+    }, 100 + (number * 100)); // 100 milliseconds gap between send and receive
   }
   res.send({ success: true });
 
