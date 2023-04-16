@@ -27,6 +27,8 @@ const RequestList = (props) => {
           last_name={request.last_name}
           request_text={request.request_text}
           phone_number={request.phone_number}
+          date_created={request.date_created}
+          time_created={request.time_created}
         />
       ))}
     </ul>
