@@ -10,19 +10,9 @@ CREATE TABLE IF NOT EXISTS category (
     CONSTRAINT category_pk PRIMARY KEY (name)
 );
 
--- Table: customer
-CREATE TABLE IF NOT EXISTS customer (
-    id int  NOT NULL AUTO_INCREMENT,
-    full_name varchar(30)  NOT NULL,
-    email varchar(30)  NOT NULL,
-    phone varchar(11)  NOT NULL,
-    enrollment_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    sale_notification bool  NOT NULL,
-    stock_notification bool  NOT NULL,
-    CONSTRAINT customer_pk PRIMARY KEY (id)
-);
 
--- alter statement
+
+-- alter statement customer
 ALTER TABLE customer
 ADD COLUMN date_created DATE NOT NULL,
 ADD COLUMN time_created TIME NOT NULL;
@@ -51,6 +41,11 @@ CREATE TABLE `customer_notifications`.`customer` (
     REFERENCES `customer_notifications`.`customer` (`phone_number`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+
+--alter statement customer_request
+    ALTER TABLE customer_request
+ADD COLUMN date_created DATE NOT NULL,
+ADD COLUMN time_created TIME NOT NULL;
 
 -- Table: login
 CREATE TABLE IF NOT EXISTS login (

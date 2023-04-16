@@ -9,11 +9,23 @@ const AddRequestForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const now = new Date();
+    let date_created = now.toJSON().slice(0, 10);
+    let time_created =
+      now.getHours().toString().padStart(2, "0") +
+      ":" +
+      now.getMinutes().toString().padStart(2, "0") +
+      ":" +
+      now.getSeconds().toString().padStart(2, "0");
+
     console.log("I am in handle submit");
     try {
       const response = await axios.post("http://localhost:3001/add-request", {
         phone_number,
         request_text,
+        date_created,
+        time_created,
       });
       alert("Request added successfully");
       // onAddRequest(response.data);
