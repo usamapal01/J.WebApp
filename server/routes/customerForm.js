@@ -8,8 +8,8 @@ router.post("/", (req, res) => {
     req.body;
 
   // Insert customer data into the database
-  const sql = `INSERT INTO customer (first_name, last_name, email, phone_number, sale_notification, newstock_notification)
-               VALUES (?, ?, ?, ?, ?, ?)`;
+  const sql = `INSERT INTO customer (first_name, last_name, email, phone_number, sale_notification, newstock_notification, date_created, time_created)
+               VALUES (?, ?, ?, ?, ?, ?, CURDATE(), CURTIME())`;
   const values = [
     first,
     last,

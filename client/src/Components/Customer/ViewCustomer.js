@@ -187,7 +187,7 @@ const ViewCustomer = () => {
                     <button onClick={handleCancel}>Cancel</button>
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(customer.cust_id)}>
+                    <button className="delete-button" onClick={() => handleDelete(customer.cust_id)}>
                       Delete
                     </button>
                   </td>

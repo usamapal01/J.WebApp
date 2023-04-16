@@ -22,6 +22,11 @@ CREATE TABLE IF NOT EXISTS customer (
     CONSTRAINT customer_pk PRIMARY KEY (id)
 );
 
+-- alter statement
+ALTER TABLE customer
+ADD COLUMN date_created DATE NOT NULL,
+ADD COLUMN time_created TIME NOT NULL;
+
 -- customer table created by pal
 CREATE TABLE `customer_notifications`.`customer` (
   `cust_id` INT NOT NULL AUTO_INCREMENT,

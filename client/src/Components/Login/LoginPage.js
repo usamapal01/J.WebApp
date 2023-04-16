@@ -51,14 +51,16 @@ function LoginPage() {
               </p>
 
               <MDBInput
+              // className="form-label"
                 wrapperClass="mb-4 mx-5 w-100"
                 labelClass="text-white"
-                label="Email address"
+                label="Email Address"
                 id="formControlLg"
                 type="email"
                 size="lg"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                labelStyle={{ paddingTop: '0.1rem', paddingLeft: '0.1rem' }}
               />
 
               <MDBInput
@@ -70,6 +72,7 @@ function LoginPage() {
                 size="lg"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                labelStyle={{ paddingTop: '0.1rem' }}
               />
 
               <p className="small mb-3 pb-lg-2">
