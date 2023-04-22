@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
+import moment from "moment";
 import Navbar from "../Navbar/Navbar";
 import "./RequestPage.css";
 
@@ -41,7 +42,7 @@ const RequestPage = () => {
       })
       .then((response) => {
         console.log(response.data);
-        alert(response.data)
+        alert(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -56,45 +57,62 @@ const RequestPage = () => {
 
   return (
     <React.Fragment>
-    <Navbar />
-    <div className="request-page">
-      <div className="request-details">
-        <h1>Request {requestData.request_id}</h1>
-        <p>
-          <b>Customer ID:</b> {requestData.cust_id}
-        </p>
-        <p>
-          <b>Customer name:</b> {requestData.first_name} {requestData.last_name}
-        </p>
-        <p>
-          <b>Phone number:</b> {requestData.phone_number}
-        </p>
-        <p>
-          <b>Request text:</b> {requestData.request_text}
-        </p>
-      </div>
-      <div className="send-message">
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type your message here"
-          className="message-input"
-        />
-        <div className="button-group">
-          <button onClick={handleSendMessage} className="send-button">
-            Send
-          </button>
-          <button onClick={handleAutoGenerate} className="auto-generate-button">
-            Auto Generate
+      <Navbar />
+      <div className="request-page">
+        <div className="request-details">
+          <div className="row">
+            <h1 className="column heading">
+              Request # {requestData.request_id}
+            </h1>
+            <div className="column date-time">
+              <div>
+                Date: {moment(requestData.date_created).format("MMMM D, YYYY")}
+              </div>
+              <div>
+                Time:{" "}
+                {moment(requestData.time_created, "HH:mm:ss").format("hh:mm A")}
+              </div>{" "}
+            </div>
+          </div>
+          <p>
+            <b>Customer ID:</b> {requestData.cust_id}
+          </p>
+          <p>
+            <b>Customer name:</b> {requestData.first_name}{" "}
+            {requestData.last_name}
+          </p>
+          <p>
+            <b>Phone number:</b> {requestData.phone_number}
+          </p>
+          <p>
+            <b>Request text:</b> {requestData.request_text}
+          </p>
+        </div>
+        <div className="send-message">
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Type your message here"
+            className="message-input"
+          />
+          <div className="button-group">
+            <button onClick={handleSendMessage} className="send-button">
+              Send
+            </button>
+            <button
+              onClick={handleAutoGenerate}
+              className="auto-generate-button"
+            >
+              Auto Generate
+            </button>
+          </div>
+        </div>
+        <div className="delete-request">
+          <button onClick={handleDeleteRequest} className="delete-button">
+            Delete Request
           </button>
         </div>
       </div>
-      <div className="delete-request">
-        <button onClick={handleDeleteRequest} className="delete-button">
-          Delete Request
-        </button>
-      </div>
-    </div>
     </React.Fragment>
   );
 };

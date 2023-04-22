@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/:request_id/user-request', (req, res) => {
   const request_id = req.params.request_id; //will hold request id
-  const sql = `SELECT r.request_id, r.phone_number,r.request_text,c.first_name,c.last_name,c.cust_id 
+  const sql = `SELECT r.request_id, r.phone_number,r.request_text,c.first_name,c.last_name,c.cust_id, r.date_created, r.time_created
                FROM customer_request r INNER JOIN customer c 
                ON r.phone_number = c.phone_number 
                WHERE r.request_id = ?`;

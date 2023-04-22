@@ -79,3 +79,24 @@
 .delete-request button.delete-button:hover {
   background-color: #c82333;
 }
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  }
+
+  .column {
+    float: left;
+    width: 50%;
+    text-align: right;
+    }
+
+    .heading {
+      text-align: left;
+    }
+
+    .date-time {
+      color: rgb(16, 14, 10);
+      font-family: 'Courier New', Courier, monospace;
+    }
