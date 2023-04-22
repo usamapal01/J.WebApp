@@ -142,7 +142,7 @@ const CustomerForm = () => {
 
   return (
     <div className="form-body">
-      <h3>Please enter your details</h3>
+      <h3>Customer Details</h3>
       <form onSubmit={handleSubmit}>
         <MDBInput
           className="mb-4"
@@ -151,6 +151,7 @@ const CustomerForm = () => {
           label="First Name"
           value={first}
           onChange={(e) => setFirst(e.target.value)}
+          labelStyle={{ paddingTop: "calc(1% - 20px)" }}
         />
         <MDBInput
           className="mb-4"
@@ -159,6 +160,7 @@ const CustomerForm = () => {
           label="Last Name"
           value={last}
           onChange={(e) => setLast(e.target.value)}
+          labelStyle={{ paddingTop: "calc(1% - 20px)" }}
         />
         <MDBInput
           className="mb-4"
@@ -167,6 +169,7 @@ const CustomerForm = () => {
           label="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          labelStyle={{ paddingTop: "calc(1% - 20px)" }}
         />
         <div
           style={{
@@ -182,32 +185,39 @@ const CustomerForm = () => {
             ""
           )}
           <MDBInput
-            className="mb-1"
+            // className="mb-1"
             type="text"
             label="Phone Number"
             style={{ paddingLeft: "30px", paddingTop: "8px" }}
             value={phone}
             onChange={(e) => {
-              if (e.target.value.length > 11) return;
+              if (e.target.value.length > 10) return;
               setPhone(e.target.value.replace(/\D/g, ""));
             }}
+            labelStyle={{ paddingTop: "calc(1% - 20px)" }}
           />
         </div>
 
-        <MDBRow className="mb-6 checkbox">
-          <MDBCheckbox
-            label="Sale Notifications"
-            defaultChecked={saleNotifications}
-            onChange={() => setSaleNotifications(!saleNotifications)}
-          />
-          <MDBCheckbox
-            label="New stock Notifications"
-            defaultChecked={stockNotifications}
-            onChange={() => setStockNotifications(!stockNotifications)}
-          />
+        <MDBRow className="mb-4 checkbox">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <MDBCheckbox
+              defaultChecked={saleNotifications}
+              onChange={() => setSaleNotifications(!saleNotifications)}
+            />
+            <span style={{ marginLeft: "10px" }}>Sale Notifications</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <MDBCheckbox
+              defaultChecked={stockNotifications}
+              onChange={() => setStockNotifications(!stockNotifications)}
+            />
+            <span style={{ marginLeft: "10px" }}>
+              New Arrival Notifications
+            </span>
+          </div>
         </MDBRow>
         {error && <div className="error">{error}</div>}
-        <MDBBtn type="submit" block>
+        <MDBBtn className="submit-button" type="submit">
           Submit
         </MDBBtn>
       </form>
