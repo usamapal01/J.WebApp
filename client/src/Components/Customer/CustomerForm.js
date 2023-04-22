@@ -142,7 +142,10 @@ const CustomerForm = () => {
 
   return (
     <div className="form-body">
-      <h3>Customer Details</h3>
+    <div>
+      <h3 className="form-heading">Customer Details</h3>
+      <h5 className="form-subheading">Please enter your details below</h5>
+      </div>
       <form onSubmit={handleSubmit}>
         <MDBInput
           className="mb-4"
