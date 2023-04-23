@@ -21,7 +21,7 @@ const RequestItem = (props) => {
             5,
             8
           )}-${props.phone_number.slice(8)}`}</h2>
-          <h3>Request: {props.request_text}</h3>
+          <h3>Title: {props.title}</h3>
         </div>
         </Link>
       </Card>

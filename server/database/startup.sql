@@ -47,6 +47,17 @@ CREATE TABLE `customer_notifications`.`customer` (
 ADD COLUMN date_created DATE NOT NULL,
 ADD COLUMN time_created TIME NOT NULL;
 
+--more alter statement customer_request
+ALTER TABLE `customer_notifications`.`customer_request` 
+ADD COLUMN `note` VARCHAR(255) NOT NULL AFTER `time_created`,
+ADD COLUMN `status` TINYINT(1) NOT NULL AFTER `description`,
+CHANGE COLUMN `request_text` `title` VARCHAR(50) NOT NULL ;
+
+--more alter statement customer_request
+ALTER TABLE customer_request
+MODIFY status TINYINT(1) NOT NULL DEFAULT 0;
+
+
 -- Table: login
 CREATE TABLE IF NOT EXISTS login (
     username varchar(20)  NOT NULL,

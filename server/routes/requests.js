@@ -26,7 +26,7 @@ const router = express.Router();
 //   });
 
 router.get('/customer-requests', (req, res) => {
-  const sql = 'SELECT r.request_id, r.phone_number,r.request_text,c.first_name,c.last_name,c.cust_id, r.date_created, r.time_created FROM customer_request r INNER JOIN customer c ON r.phone_number = c.phone_number';
+  const sql = 'SELECT r.request_id, r.phone_number,r.title,c.first_name,c.last_name,c.cust_id, r.date_created, r.time_created FROM customer_request r INNER JOIN customer c ON r.phone_number = c.phone_number';
   conn.query(sql, (err, result) => {
     if (err) {
       console.error(err.message);

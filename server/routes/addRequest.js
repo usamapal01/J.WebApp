@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.post("/add-request", async (req, res) => {
     try {
-      const { phone_number, request_text, date_created, time_created } = req.body;
+      const { phone_number, note, date_created, time_created, title } = req.body;
       const newRequest = await conn.promise().execute(
-        "INSERT INTO customer_request (phone_number, request_text, date_created, time_created) VALUES (?, ?, ?, ?)",
-        [phone_number, request_text, date_created, time_created]
+        "INSERT INTO customer_request (phone_number, note, date_created, time_created, title) VALUES (?, ?, ?, ?, ?)",
+        [phone_number, note, date_created, time_created, title]
       );
       res.json({ message: "Request added successfully." });
     } catch (err) {
