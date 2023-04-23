@@ -15,7 +15,7 @@ const RequestItem = (props) => {
           <h1>Date: {moment(props.date_created).format("MMMM D, YY")}</h1>
           <h1>Time: {moment(props.time_created, "HH:mm:ss").format("hh:mm A")}</h1>
           <h2>
-            Full Name: {props.first_name} {props.last_name}
+            Name: {props.first_name} {props.last_name}
           </h2>
           <h2>{`+1 (${props.phone_number.slice(2, 5)}) ${props.phone_number.slice(
             5,
