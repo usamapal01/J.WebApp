@@ -39,4 +39,22 @@ router.delete("/:request_id/user-request", (req, res) => {
   });
 });
 
+// responsible for updating the completion status of a request
+router.put("/:request_id/user-request", (req, res) => {
+  const request_id = req.params.request_id;
+  const status = req.body.status;
+
+  const sql = "UPDATE customer_request SET status = ? WHERE request_id = ?";
+  conn.query(sql, [status, request_id], (err, result) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send("Error updating request status in database");
+    } else if (result.affectedRows === 0) {
+      res.status(404).send("Request not found");
+    } else {
+      res.send("Request status updated successfully");
+    }
+  });
+});
+
 module.exports = router;

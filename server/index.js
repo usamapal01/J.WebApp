@@ -30,6 +30,7 @@ app.post("/add-request", addRequestRouter);
 // This is resposible for displaying individual requests
 app.get("/:request_id/user-request", requestPageRouter);
 app.delete("/:request_id/user-request", requestPageRouter);
+app.put("/:request_id/user-request", requestPageRouter);
 // app.post('/customer-requests', requestRouter)
 // app.delete('/customer-requests', requestRouter)
 

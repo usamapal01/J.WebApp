@@ -66,6 +66,8 @@
   background-color: #218838;
 }
 
+
+
 .delete-request button.delete-button {
   padding: 10px 20px;
   border: none;
@@ -85,19 +87,42 @@
   content: "";
   display: table;
   clear: both;
-  }
+}
 
-  .column {
-    float: left;
-    width: 50%;
-    text-align: right;
-    }
+.column {
+  float: left;
+  width: 50%;
+  text-align: right;
+}
 
-    .heading {
-      text-align: left;
-    }
+.heading {
+  text-align: left;
+}
 
-    .date-time {
-      color: rgb(16, 14, 10);
-      font-family: 'Courier New', Courier, monospace;
-    }
+.date-time {
+  color: rgb(16, 14, 10);
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+}
+
+.progress-button.completed {
+  background-color: green;
+  font-weight: 900;
+}
+
+.progress-button.completed:hover {
+  background-color: rgb(43, 157, 43);
+  font-weight: 900;
+}
+
+.progress-button.in-progress {
+  background-color: rgb(216, 200, 17);
+  color: #060203;
+  font-weight: 900;
+}
+
+.progress-button.in-progress:hover {
+  background-color: rgb(170, 159, 40);
+  color: #060203;
+  font-weight: 900;
+}

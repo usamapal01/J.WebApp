@@ -52,11 +52,13 @@ const RequestPage = () => {
 
   const handleStatusChange = () => {
     axios
-      .put(`http://localhost:3001/${request_id}/update-status`, {
-        status: !status,
+      .put(`http://localhost:3001/${request_id}/user-request`, {
+        status: !requestData.status,
       })
       .then((response) => {
-        setStatus(!status);
+        setStatus(!requestData.status);
+        // setRequestData({ ...requestData, status: !requestData.status });
+        window.location.reload(); // reload the page
       })
       .catch((error) => {
         console.error(error);
@@ -99,14 +101,19 @@ const RequestPage = () => {
             <b>Phone number:</b> {requestData.phone_number}
           </p>
           <p>
-            <b>Request title:</b> {requestData.title}
+            <b>Request Title:</b> {requestData.title}
           </p>
           <p>
             <b>Request Note:</b> {requestData.note}
           </p>
-          <p>
-            <b>Request Completion Status:</b> {requestData.status}
-          </p>
+          <button
+            className={`progress-button ${
+              requestData.status ? "completed" : "in-progress"
+            }`}
+            onClick={handleStatusChange}
+          >
+            {requestData.status ? "Completed" : "In progress"}
+          </button>
         </div>
         <div className="send-message">
           <textarea
