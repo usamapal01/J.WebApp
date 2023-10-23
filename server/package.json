@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "cross-env NODE_ENV=production nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +17,23 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.2.0",
     "nodemon": "^2.0.21",
+    "pkg": "^5.8.1",
     "twilio": "^4.9.0"
+  },
+  "pkg": {
+    "scripts": "build/static/js/*.js",
+    "assets": [
+      "build/static/media/*.js",
+      "build/static/css/*.css",
+      "build/index.html"
+    ],
+    "targets": [
+      "node12-linxux-x64",
+      "node12-windows-x64"
+    ],
+    "outputPath": "build/dist"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

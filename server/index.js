@@ -11,6 +11,8 @@ const twilioWelcomeSMSRouter = require("./twilioWelcomeSMS");
 const loginRouter = require("./routes/login");
 
 const app = express();
+const path = require('path');
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,6 +41,24 @@ app.use("/", twilioRequestRouter);
 
 // resposible for sending a welcome messages
 app.post("/welcome-message", twilioWelcomeSMSRouter);
+
+//============================================================================
+// Serve static assets (React build) if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith("/customer") || 
+        req.path.startsWith("/display-customer")) 
+        //... any other API endpoints you want to exclude
+        {
+      return next();  // Skip to the next middleware if it's one of your API routes
+    }
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+}
+//================================================================================
 
 const PORT = process.env.PORT || 3001;
 
