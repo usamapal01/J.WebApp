@@ -56,9 +56,11 @@ const RequestPage = () => {
         status: !requestData.status,
       })
       .then((response) => {
-        setStatus(!requestData.status);
-        // setRequestData({ ...requestData, status: !requestData.status });
-        window.location.reload(); // reload the page
+        if (response.data && response.data.message) {
+          console.log(response.data.message);
+          // Update local state with the new status
+          setRequestData({ ...requestData, status: response.data.status });
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -112,7 +114,7 @@ const RequestPage = () => {
             }`}
             onClick={handleStatusChange}
           >
-            {requestData.status ? "Completed" : "In progress"}
+            {requestData.status ? "Request Completed" : "In progress"}
           </button>
         </div>
         <div className="send-message">

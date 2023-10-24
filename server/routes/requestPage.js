@@ -52,7 +52,7 @@ router.put("/:request_id/user-request", (req, res) => {
     } else if (result.affectedRows === 0) {
       res.status(404).send("Request not found");
     } else {
-      res.send("Request status updated successfully");
+      res.json({ message: "Request status updated successfully", status: status });
     }
   });
 });
