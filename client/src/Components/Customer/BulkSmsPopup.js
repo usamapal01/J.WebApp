@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { serverURL } from "../../App";
 
 const BulkSmsPopup = ({ customers, onClose }) => {
   const [data, setData] = useState({ type: "sale_notification", message: "" });
@@ -11,7 +12,7 @@ const BulkSmsPopup = ({ customers, onClose }) => {
   const handleSendMessage = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/send-bulk-message", {
+      .post(`${serverURL}/send-bulk-message`, {
         to: customers
           .filter((a) => a[data.type]) // a is respoinsible for either sale noti or stock noti
           .map((customer) => customer.phone_number), // only map those values which are true

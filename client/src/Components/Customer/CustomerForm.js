@@ -10,6 +10,7 @@ import {
 import { logout } from "../Login/authentication";
 
 import "./CustomerForm.css";
+import { serverURL } from "../../App";
 
 const CustomerForm = () => {
   const [first, setFirst] = useState("");
@@ -108,7 +109,7 @@ const CustomerForm = () => {
     try {
       const saleNotificationsValue = saleNotifications ? 1 : 0;
       const stockNotificationsValue = stockNotifications ? 1 : 0;
-      await axios.post("http://localhost:3001/customer", {
+      await axios.post(`${serverURL}/customer`, {
         first,
         last,
         email,
@@ -127,7 +128,7 @@ const CustomerForm = () => {
   // notification sms for new customer
   const handleWelcomeMessage = () => {
     axios
-      .post("http://localhost:3001/welcome-message", {
+      .post(`${serverURL}//welcome-message`, {
         to: phone,
         first_name: first,
         last_name: last,

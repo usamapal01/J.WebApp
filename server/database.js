@@ -1,9 +1,14 @@
 const mysql = require('mysql2');
+
+require("dotenv").config();
+
+
 let conn = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "password",
-    database: "customer_notifications"
+  host: process.env.DATABASE_HOST || "localhost",
+  user: process.env.DATABASE_USER || "root",
+  password: process.env.DATABASE_PASSWORD || "password",
+  // database: process.env.DATABASE || "database-1",
+  connectionLimit:10
   });
 
 conn.connect((err) => {

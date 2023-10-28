@@ -4,6 +4,7 @@ import axios from "axios";
 import "./ViewCustomer.css";
 import BulkSmsPopup from "./BulkSmsPopup";
 import Navbar from "../Navbar/Navbar";
+import { serverURL } from "../../App";
 
 const ViewCustomer = () => {
   const [smsPopup, setSmsPopup] = useState(false);
@@ -21,7 +22,7 @@ const ViewCustomer = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/display-customer")
+      .get(`${serverURL}/display-customer`)
       .then((res) => {
         console.log(res.data); // added this line
         setCustomers(res.data);
@@ -51,7 +52,7 @@ const ViewCustomer = () => {
       return;
     }
     axios
-      .put(`http://localhost:3001/update-customer/${id}`, editedCustomer)
+      .put(`${serverURL}/update-customer/${id}`, editedCustomer)
       .then((res) => {
         console.log(res);
         setEditingCustomerId(null);
@@ -92,7 +93,7 @@ const ViewCustomer = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/delete-customer/${id}`)
+      .delete(`${serverURL}/delete-customer/${id}`)
       .then((res) => {
         console.log(res);
         setCustomers((prevCustomers) =>

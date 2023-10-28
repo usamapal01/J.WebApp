@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import "./AddRequestForm.css";
+import { serverURL } from "../../App";
 
 const AddRequestForm = () => {
   const [phone_number, setPhoneNumber] = useState("+1");
@@ -23,7 +24,7 @@ const AddRequestForm = () => {
 
     console.log("I am in handle submit");
     try {
-      const response = await axios.post("http://localhost:3001/add-request", {
+      const response = await axios.post(`${serverURL}/add-request`, {
         phone_number,
         note,
         date_created,

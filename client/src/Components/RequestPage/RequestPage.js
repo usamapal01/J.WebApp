@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 import Navbar from "../Navbar/Navbar";
 import "./RequestPage.css";
+import { serverURL } from "../../App";
 
 const RequestPage = () => {
   const [requestData, setRequestData] = useState({});
@@ -14,7 +15,7 @@ const RequestPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/${request_id}/user-request`)
+      .get(`${serverURL}/${request_id}/user-request`)
       .then((response) => {
         setRequestData(response.data);
       })
@@ -25,7 +26,7 @@ const RequestPage = () => {
 
   const handleDeleteRequest = () => {
     axios
-      .delete(`http://localhost:3001/${request_id}/user-request`)
+      .delete(`${serverURL}/${request_id}/user-request`)
       .then(() => {
         // Redirect to previous page
         history.goBack();
@@ -37,7 +38,7 @@ const RequestPage = () => {
 
   const handleSendMessage = () => {
     axios
-      .post("http://localhost:3001/send-message", {
+      .post(`${serverURL}/send-message`, {
         to: requestData.phone_number,
         body: message,
       })
@@ -52,7 +53,7 @@ const RequestPage = () => {
 
   const handleStatusChange = () => {
     axios
-      .put(`http://localhost:3001/${request_id}/user-request`, {
+      .put(`${serverURL}/${request_id}/user-request`, {
         status: !requestData.status,
       })
       .then((response) => {

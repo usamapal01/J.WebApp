@@ -8,7 +8,7 @@ const Requests = () => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/customer-requests").then((response) => {
+    axios.get(`${serverURL}/customer-requests`).then((response) => {
     console.log(response.data);  
     setRequests(response.data);
     })
@@ -23,7 +23,7 @@ const Requests = () => {
 
 //   const handleDeleteRequest = async (id) => {
 //     try {
-//       await axios.delete(`http://localhost:3001/customer-requests/${id}`);
+//       await axios.delete(`serverURL/customer-requests/${id}`);
 //       setRequests(requests.filter((request) => request.request_id !== id));
 //     } catch (err) {
 //       console.error(err);

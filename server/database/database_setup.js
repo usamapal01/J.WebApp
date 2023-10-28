@@ -2,14 +2,16 @@
 
 function setupDatabase(){
 	let mysql = require('mysql');
-	const name = "test_db";
+	const name = process.env.DB_NAME;
 
 	//------------Create database----------------
 
 	let con = mysql.createConnection({
-	  host: "localhost",
-	  user: "Admin",
-	  password: "12345"
+		host: process.env.DATABASE_HOST || "localhost",
+		user: process.env.DATABASE_USER || "root",
+		password: process.env.DATABASE_PASSWORD || "password",
+		// database: process.env.DATABASE || "database-1",
+		connectionLimit:10
 	});
 
 	con.connect(function(err) {
@@ -33,10 +35,11 @@ function setupDatabase(){
 	//------------Connect to database----------------
 	
 	con = mysql.createConnection({
-	  host: "localhost",
-	  user: "Admin",
-	  password: "12345",
-	  database: name
+		host: process.env.DATABASE_HOST || "localhost",
+		user: process.env.DATABASE_USER || "root",
+		password: process.env.DATABASE_PASSWORD || "password",
+		// database: process.env.DATABASE || "database-1",
+		connectionLimit:10
 	});
 	
 	con.connect(function(err) {

@@ -9,11 +9,11 @@ const requestPageRouter = require("./routes/requestPage");
 const twilioRequestRouter = require("./twilioRequest");
 const twilioWelcomeSMSRouter = require("./twilioWelcomeSMS");
 const loginRouter = require("./routes/login");
-
+const dotenv = require("dotenv");
 const app = express();
 const path = require('path');
 
-
+dotenv.config({ path: "./.env" });
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -60,7 +60,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 //================================================================================
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
