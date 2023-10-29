@@ -18,7 +18,7 @@ import Requests from "./Components/Request/Requests";
 import RequestPage from "./Components/RequestPage/RequestPage";
 import AddRequestForm from "./Components/RequestPage/AddRequestForm";
 
-export const serverURL ="http://api.jjnotify.com/"
+export const serverURL ="http://api.jjnotify.com"
 function App() {
   return (
     <Router>
